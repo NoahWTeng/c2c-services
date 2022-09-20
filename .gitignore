@@ -1,0 +1,6 @@
+.env
+*.idea
+config.yml
+/logs 
+/db
+*.crt
