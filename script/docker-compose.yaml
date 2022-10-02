@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  # app:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   container_name: c2c-api
+
+  mongodb:
+    container_name: node-mongodb-query
+    image: mongo:latest
+    ports:
+      - 27018:27018
+    command: mongod --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  postgres:
+    container_name: node-postgres-command
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=c2c_services
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+

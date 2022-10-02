@@ -7,7 +7,7 @@
 package app
 
 import (
-	"c2c-services/src/libs/injector"
+	"c2c-services/src/core/injector"
 )
 
 // Injectors from wire.go:
@@ -18,9 +18,11 @@ func CreateNewApp() (*AppContainer, error) {
 		return nil, err
 	}
 	handler := injector.MongodbProvider(global)
+	pqdbHandler := injector.PqdbProvider(global)
 	appContainer := &AppContainer{
 		config:  global,
 		mongodb: handler,
+		pqdb:    pqdbHandler,
 	}
 	return appContainer, nil
 }
